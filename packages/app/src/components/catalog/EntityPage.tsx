@@ -57,6 +57,12 @@ import {
 
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
+import { CustomPage } from '@internal/plugin-custom';
+
+
+const customPluginContent = (
+  <CustomPage />
+)
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -174,6 +180,10 @@ const serviceEntityPage = (
 
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/custom" title="Custom">
+      {customPluginContent}
     </EntityLayout.Route>
   </EntityLayout>
 );
