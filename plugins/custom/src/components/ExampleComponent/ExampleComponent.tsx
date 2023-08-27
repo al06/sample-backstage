@@ -10,29 +10,33 @@ import {
   SupportButton,
 } from '@backstage/core-components';
 import { ExampleFetchComponent } from '../ExampleFetchComponent';
+import { useEntity } from '@backstage/plugin-catalog-react';
 
-export const ExampleComponent = () => (
-  <Page themeId="tool">
-    <Header title="Welcome to custom!" subtitle="Optional subtitle">
-      <HeaderLabel label="Owner" value="Team X" />
-      <HeaderLabel label="Lifecycle" value="Alpha" />
-    </Header>
-    <Content>
-      <ContentHeader title="Plugin title">
-        <SupportButton>A description of your plugin goes here.</SupportButton>
-      </ContentHeader>
-      <Grid container spacing={3} direction="column">
-        <Grid item>
-          <InfoCard title="Information card">
-            <Typography variant="body1">
-              All content should be wrapped in a card like this.
-            </Typography>
-          </InfoCard>
+export const ExampleComponent = () => {
+  const { entity } = useEntity();
+  return (
+    <Page themeId="tool">
+      <Header title="Welcome to custom!" subtitle="Optional subtitle">
+        <HeaderLabel label="Owner" value="Team X" />
+        <HeaderLabel label="Lifecycle" value="Alpha" />
+      </Header>
+      <Content>
+        <ContentHeader title="Plugin title">
+          <SupportButton>A description of your plugin goes here.</SupportButton>
+        </ContentHeader>
+        <Grid container spacing={3} direction="column">
+          <Grid item>
+            <InfoCard title="Information card">
+              <Typography variant="body1">
+                My parent entity is { entity?.metadata?.name }
+              </Typography>
+            </InfoCard>
+          </Grid>
+          <Grid item>
+            <ExampleFetchComponent />
+          </Grid>
         </Grid>
-        <Grid item>
-          <ExampleFetchComponent />
-        </Grid>
-      </Grid>
-    </Content>
-  </Page>
-);
+      </Content>
+    </Page>
+  );
+};
